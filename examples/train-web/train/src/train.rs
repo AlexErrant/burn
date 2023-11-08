@@ -127,5 +127,7 @@ pub fn run<B: AutodiffBackend>(device: B::Device) {
 
     let _learner = builder.build(model, optim, config.lr);
 
+    _learner.do_thing();
+
     // let _model_trained = learner.fit(dataloader_train, dataloader_test);
 }

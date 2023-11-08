@@ -200,4 +200,11 @@ impl<LC: LearnerComponents> Learner<LC> {
 
         self.model
     }
+
+    pub fn do_thing(self) -> () {
+        self.event_store
+            .add_event_train(crate::metric::store::Event::EndEpoch(1337));
+        self.event_store
+            .add_event_valid(crate::metric::store::Event::EndEpoch(314159));
+    }
 }

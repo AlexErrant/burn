@@ -1,6 +1,7 @@
 use crate::metric::MetricEntry;
 
 /// Event happening during the training/validation process.
+#[derive(Debug)]
 pub enum Event {
     /// Signal that metrics have been updated.
     MetricsUpdate(MetricsUpdate),
@@ -9,7 +10,7 @@ pub enum Event {
 }
 
 /// Contains all metric information.
-#[derive(new, Clone)]
+#[derive(new, Clone, Debug)]
 pub struct MetricsUpdate {
     /// Metrics information related to non-numeric metrics.
     pub entries: Vec<MetricEntry>,
@@ -50,7 +51,7 @@ pub enum Aggregate {
     Mean,
 }
 
-#[derive(Copy, Clone)]
+#[derive(Copy, Clone, Debug)]
 /// The split to use.
 pub enum Split {
     /// The training split.
@@ -59,7 +60,7 @@ pub enum Split {
     Valid,
 }
 
-#[derive(Copy, Clone)]
+#[derive(Copy, Clone, Debug)]
 /// The direction of the query.
 pub enum Direction {
     /// Lower is better.

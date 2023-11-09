@@ -126,6 +126,7 @@ where
     }
 }
 
+#[derive(Debug)]
 enum Message {
     OnEventTrain(Event),
     OnEventValid(Event),

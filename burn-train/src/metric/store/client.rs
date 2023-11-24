@@ -1,6 +1,7 @@
 use super::EventStore;
 use super::{Aggregate, Direction, Event, Split};
 use crate::util;
+use log::info;
 use std::sync::mpsc;
 
 /// Type that allows to communicate with an [event store](EventStore).
@@ -21,7 +22,10 @@ impl EventStoreClient {
         let handler = util::spawn(move || thread.run());
         let handler = Some(handler);
 
-        Self { sender, handler }
+        Self {
+            sender,
+            handler: None,
+        }
     }
 }
 
@@ -103,6 +107,7 @@ where
 {
     fn run(mut self) {
         for item in self.receiver.iter() {
+            info!("EventStoreClient got msg: {:?}", item);
             match item {
                 Message::End => {
                     return;

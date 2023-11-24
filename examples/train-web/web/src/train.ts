@@ -37,7 +37,9 @@ async function loadSqliteAndRun(ab: ArrayBuffer) {
 	const testLengths: number[] = []
 	const db = await getDb(ab)
 	try {
-		const trainQuery = db.prepare('select label, image_bytes from train')
+		const trainQuery = db.prepare(
+			'select label, image_bytes from train limit 2',
+		)
 		while (trainQuery.step()) {
 			const row = trainQuery.getAsObject()
 			const label = row.label as number
@@ -47,7 +49,7 @@ async function loadSqliteAndRun(ab: ArrayBuffer) {
 			trainLengths.push(bytes.length)
 		}
 		trainQuery.free()
-		const testQuery = db.prepare('select label, image_bytes from test')
+		const testQuery = db.prepare('select label, image_bytes from test limit 2')
 		while (testQuery.step()) {
 			const row = testQuery.getAsObject()
 			const label = row.label as number
